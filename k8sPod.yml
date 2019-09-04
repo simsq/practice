@@ -1,0 +1,78 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: '17'
+  creationTimestamp: '2019-08-07T03:05:15Z'
+  generation: 17
+  labels:
+    app: cip-user-manageapi
+  name: cip-user-manageapi
+  namespace: cip
+  resourceVersion: '729103229'
+  selfLink: /apis/apps/v1beta2/namespaces/cip/deployments/cip-user-manageapi
+  uid: 2e15ee66-b8c0-11e9-bd51-b6f40647e16e
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: cip-user-manageapi
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cip-user-manageapi
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_URLS
+              value: 'http://*:7030'
+            - name: DOTNET_RUNNING_IN_CONTAINER
+              value: 'true'
+            - name: ConfigCenterOptions
+              value: >-
+                Host=http://4994e9520c7646dea7a86105b1fe3c33-cn-shanghai-vpc.alicloudapi.com/ConfigCenter/Internal/;SecretKey=123456789012345678901234
+          image: >-
+            registry-vpc.cn-shanghai.aliyuncs.com/clp-cip-apisystem/cip-user-manageapi:1.0.2
+          imagePullPolicy: IfNotPresent
+          name: cip-user-manageapi
+          resources:
+            limits:
+              memory: 300Mi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: vpc
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2019-08-23T10:47:11Z'
+      lastUpdateTime: '2019-08-23T10:47:11Z'
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: 'True'
+      type: Available
+    - lastTransitionTime: '2019-08-07T03:05:15Z'
+      lastUpdateTime: '2019-08-23T10:47:12Z'
+      message: ReplicaSet "cip-user-manageapi-97c95cb8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: 'True'
+      type: Progressing
+  observedGeneration: 17
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
