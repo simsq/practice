@@ -37,7 +37,7 @@ spec:
               value: 'true'
             - name: ConfigCenterOptions
               value: >-
-                Host=http://4994e9520c7646dea7a86105b1fe3c33-cn-shanghai-vpc.alicloudapi.com/ConfigCenter/Internal/;SecretKey=123456789012345678901234
+                Host=http:XXXXXXXXX/;SecretKey=XXXXXXX
           image: >-
             registry-vpc.cn-shanghai.aliyuncs.com/clp-cip-apisystem/cip-user-manageapi:1.0.2
           imagePullPolicy: IfNotPresent
