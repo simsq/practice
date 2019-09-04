@@ -1,0 +1,30 @@
+stages:
+  - package
+  - build
+package-job:
+  stage: package
+  only:
+    refs:
+     - tags
+    variables:
+     - $CI_COMMIT_TAG =~ /.*/
+  artifacts:
+    paths:
+      - publish_apiuser/
+  script:
+    - pwd
+    - dotnet publish -c Release -o ../publish_apiuser  ./Api.User.Web/Api.User.Web.csproj  --configfile nuget.config
+    - cd publish_apiuser/
+    - ls
+build-job:
+  stage: build
+  only:
+    refs:
+     - tags
+    variables:
+     - $CI_COMMIT_TAG =~ /.*/
+  script:
+    - cd publish_apiuser/
+    - docker login -u  'your username'  -p  'your password'   'your registry'
+    - docker build -t registry-vpc.cn-shanghai.aliyuncs.com/clp-cip-apisystem/cip-user-manageapi:$CI_COMMIT_TAG .
+    - docker push registry-vpc.cn-shanghai.aliyuncs.com/clp-cip-apisystem/cip-user-manageapi:$CI_COMMIT_TAG
