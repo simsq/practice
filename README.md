@@ -38,7 +38,7 @@ gitlab：代码托管，以及CI/CD。</br>
 ![avatar](/images/调用链.jpg)
 
 ### CI/CD
-b客户需求多样化，公司发展太快客户也越来越多，我们版本的发布也非常频繁，传统人肉发布的方式会给我们很痛苦，所有我们引用runner，通过在gitlab对提交的版本打标签的方式来构建镜像，镜像构建成功后自动推送到k8s中，k8s会根据我们配置的策略自动升级。
+b客户需求多样化，公司发展太快客户也越来越多，我们版本的发布也非常频繁，传统人肉发布的方式让我们很痛苦，所有我们引用runner，通过在gitlab对提交的版本打标签的方式来构建镜像，镜像构建成功后自动推送到k8s中，k8s会根据我们配置的策略自动升级。
 ###### gitlab-ci.yml 脚本
 https://github.com/simsq/Software-Architecture-in-Practics/blob/master/.gitlab-ci.yml
 ###### k8s.yml 脚本
